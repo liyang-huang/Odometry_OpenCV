@@ -652,256 +652,256 @@ using namespace cv;
   /** Odometry based on the paper "Real-Time Visual Odometry from Dense RGB-D Images",
    * F. Steinbucker, J. Strum, D. Cremers, ICCV, 2011.
    */
-  class  RgbdOdometry: public Odometry
-  {
-  public:
-    RgbdOdometry();
-    /** Constructor.
-     * @param cameraMatrix Camera matrix
-     * @param minDepth Pixels with depth less than minDepth will not be used (in meters)
-     * @param maxDepth Pixels with depth larger than maxDepth will not be used (in meters)
-     * @param maxDepthDiff Correspondences between pixels of two given frames will be filtered out
-     *                     if their depth difference is larger than maxDepthDiff (in meters)
-     * @param iterCounts Count of iterations on each pyramid level.
-     * @param minGradientMagnitudes For each pyramid level the pixels will be filtered out
-     *                              if they have gradient magnitude less than minGradientMagnitudes[level].
-     * @param maxPointsPart The method uses a random pixels subset of size frameWidth x frameHeight x pointsPart
-     * @param transformType Class of transformation
-     */
-    RgbdOdometry(const Mat& cameraMatrix, float minDepth = DEFAULT_MIN_DEPTH(), float maxDepth = DEFAULT_MAX_DEPTH(),
-                 float maxDepthDiff = DEFAULT_MAX_DEPTH_DIFF(), const std::vector<int>& iterCounts = std::vector<int>(),
-                 const std::vector<float>& minGradientMagnitudes = std::vector<float>(), float maxPointsPart = DEFAULT_MAX_POINTS_PART(),
-                 int transformType = RIGID_BODY_MOTION);
+ //class  RgbdOdometry: public Odometry
+ //{
+ //public:
+ //  RgbdOdometry();
+ //  /** Constructor.
+ //   * @param cameraMatrix Camera matrix
+ //   * @param minDepth Pixels with depth less than minDepth will not be used (in meters)
+ //   * @param maxDepth Pixels with depth larger than maxDepth will not be used (in meters)
+ //   * @param maxDepthDiff Correspondences between pixels of two given frames will be filtered out
+ //   *                     if their depth difference is larger than maxDepthDiff (in meters)
+ //   * @param iterCounts Count of iterations on each pyramid level.
+ //   * @param minGradientMagnitudes For each pyramid level the pixels will be filtered out
+ //   *                              if they have gradient magnitude less than minGradientMagnitudes[level].
+ //   * @param maxPointsPart The method uses a random pixels subset of size frameWidth x frameHeight x pointsPart
+ //   * @param transformType Class of transformation
+ //   */
+ //  RgbdOdometry(const Mat& cameraMatrix, float minDepth = DEFAULT_MIN_DEPTH(), float maxDepth = DEFAULT_MAX_DEPTH(),
+ //               float maxDepthDiff = DEFAULT_MAX_DEPTH_DIFF(), const std::vector<int>& iterCounts = std::vector<int>(),
+ //               const std::vector<float>& minGradientMagnitudes = std::vector<float>(), float maxPointsPart = DEFAULT_MAX_POINTS_PART(),
+ //               int transformType = RIGID_BODY_MOTION);
 
-    virtual Size prepareFrameCache(Ptr<OdometryFrame>& frame, int cacheType) const;
+ //  virtual Size prepareFrameCache(Ptr<OdometryFrame>& frame, int cacheType) const;
 
-    cv::Mat getCameraMatrix() const
-    {
-        return cameraMatrix;
-    }
-    void setCameraMatrix(const cv::Mat &val)
-    {
-        cameraMatrix = val;
-    }
-    double getMinDepth() const
-    {
-        return minDepth;
-    }
-    void setMinDepth(double val)
-    {
-        minDepth = val;
-    }
-    double getMaxDepth() const
-    {
-        return maxDepth;
-    }
-    void setMaxDepth(double val)
-    {
-        maxDepth = val;
-    }
-    double getMaxDepthDiff() const
-    {
-        return maxDepthDiff;
-    }
-    void setMaxDepthDiff(double val)
-    {
-        maxDepthDiff = val;
-    }
-    cv::Mat getIterationCounts() const
-    {
-        return iterCounts;
-    }
-    void setIterationCounts(const cv::Mat &val)
-    {
-        iterCounts = val;
-    }
-    cv::Mat getMinGradientMagnitudes() const
-    {
-        return minGradientMagnitudes;
-    }
-    void setMinGradientMagnitudes(const cv::Mat &val)
-    {
-        minGradientMagnitudes = val;
-    }
-    double getMaxPointsPart() const
-    {
-        return maxPointsPart;
-    }
-    void setMaxPointsPart(double val)
-    {
-        maxPointsPart = val;
-    }
-    int getTransformType() const
-    {
-        return transformType;
-    }
-    void setTransformType(int val)
-    {
-        transformType = val;
-    }
-    double getMaxTranslation() const
-    {
-        return maxTranslation;
-    }
-    void setMaxTranslation(double val)
-    {
-        maxTranslation = val;
-    }
-    double getMaxRotation() const
-    {
-        return maxRotation;
-    }
-    void setMaxRotation(double val)
-    {
-        maxRotation = val;
-    }
+ //  cv::Mat getCameraMatrix() const
+ //  {
+ //      return cameraMatrix;
+ //  }
+ //  void setCameraMatrix(const cv::Mat &val)
+ //  {
+ //      cameraMatrix = val;
+ //  }
+ //  double getMinDepth() const
+ //  {
+ //      return minDepth;
+ //  }
+ //  void setMinDepth(double val)
+ //  {
+ //      minDepth = val;
+ //  }
+ //  double getMaxDepth() const
+ //  {
+ //      return maxDepth;
+ //  }
+ //  void setMaxDepth(double val)
+ //  {
+ //      maxDepth = val;
+ //  }
+ //  double getMaxDepthDiff() const
+ //  {
+ //      return maxDepthDiff;
+ //  }
+ //  void setMaxDepthDiff(double val)
+ //  {
+ //      maxDepthDiff = val;
+ //  }
+ //  cv::Mat getIterationCounts() const
+ //  {
+ //      return iterCounts;
+ //  }
+ //  void setIterationCounts(const cv::Mat &val)
+ //  {
+ //      iterCounts = val;
+ //  }
+ //  cv::Mat getMinGradientMagnitudes() const
+ //  {
+ //      return minGradientMagnitudes;
+ //  }
+ //  void setMinGradientMagnitudes(const cv::Mat &val)
+ //  {
+ //      minGradientMagnitudes = val;
+ //  }
+ //  double getMaxPointsPart() const
+ //  {
+ //      return maxPointsPart;
+ //  }
+ //  void setMaxPointsPart(double val)
+ //  {
+ //      maxPointsPart = val;
+ //  }
+ //  int getTransformType() const
+ //  {
+ //      return transformType;
+ //  }
+ //  void setTransformType(int val)
+ //  {
+ //      transformType = val;
+ //  }
+ //  double getMaxTranslation() const
+ //  {
+ //      return maxTranslation;
+ //  }
+ //  void setMaxTranslation(double val)
+ //  {
+ //      maxTranslation = val;
+ //  }
+ //  double getMaxRotation() const
+ //  {
+ //      return maxRotation;
+ //  }
+ //  void setMaxRotation(double val)
+ //  {
+ //      maxRotation = val;
+ //  }
 
-  protected:
-    virtual void
-    checkParams() const;
+ //protected:
+ //  virtual void
+ //  checkParams() const;
 
-    virtual bool
-    computeImpl(const Ptr<OdometryFrame>& srcFrame, const Ptr<OdometryFrame>& dstFrame, Mat& Rt,
-                const Mat& initRt) const;
+ //  virtual bool
+ //  computeImpl(const Ptr<OdometryFrame>& srcFrame, const Ptr<OdometryFrame>& dstFrame, Mat& Rt,
+ //              const Mat& initRt) const;
 
-    // Some params have commented desired type. It's due to AlgorithmInfo::addParams does not support it now.
-    /*float*/
-    double minDepth, maxDepth, maxDepthDiff;
-    /*vector<int>*/
-    Mat iterCounts;
-    /*vector<float>*/
-    Mat minGradientMagnitudes;
-    double maxPointsPart;
+ //  // Some params have commented desired type. It's due to AlgorithmInfo::addParams does not support it now.
+ //  /*float*/
+ //  double minDepth, maxDepth, maxDepthDiff;
+ //  /*vector<int>*/
+ //  Mat iterCounts;
+ //  /*vector<float>*/
+ //  Mat minGradientMagnitudes;
+ //  double maxPointsPart;
 
-    Mat cameraMatrix;
-    int transformType;
+ //  Mat cameraMatrix;
+ //  int transformType;
 
-    double maxTranslation, maxRotation;
-  };
+ //  double maxTranslation, maxRotation;
+ //};
 
-  /** Odometry based on the paper "KinectFusion: Real-Time Dense Surface Mapping and Tracking",
-   * Richard A. Newcombe, Andrew Fitzgibbon, at al, SIGGRAPH, 2011.
-   */
-  class ICPOdometry: public Odometry
-  {
-  public:
-    ICPOdometry();
-    /** Constructor.
-     * @param cameraMatrix Camera matrix
-     * @param minDepth Pixels with depth less than minDepth will not be used
-     * @param maxDepth Pixels with depth larger than maxDepth will not be used
-     * @param maxDepthDiff Correspondences between pixels of two given frames will be filtered out
-     *                     if their depth difference is larger than maxDepthDiff
-     * @param maxPointsPart The method uses a random pixels subset of size frameWidth x frameHeight x pointsPart
-     * @param iterCounts Count of iterations on each pyramid level.
-     * @param transformType Class of trasformation
-     */
-    ICPOdometry(const Mat& cameraMatrix, float minDepth = DEFAULT_MIN_DEPTH(), float maxDepth = DEFAULT_MAX_DEPTH(),
-                float maxDepthDiff = DEFAULT_MAX_DEPTH_DIFF(), float maxPointsPart = DEFAULT_MAX_POINTS_PART(),
-                const std::vector<int>& iterCounts = std::vector<int>(), int transformType = RIGID_BODY_MOTION);
+ ///** Odometry based on the paper "KinectFusion: Real-Time Dense Surface Mapping and Tracking",
+ // * Richard A. Newcombe, Andrew Fitzgibbon, at al, SIGGRAPH, 2011.
+ // */
+ //class ICPOdometry: public Odometry
+ //{
+ //public:
+ //  ICPOdometry();
+ //  /** Constructor.
+ //   * @param cameraMatrix Camera matrix
+ //   * @param minDepth Pixels with depth less than minDepth will not be used
+ //   * @param maxDepth Pixels with depth larger than maxDepth will not be used
+ //   * @param maxDepthDiff Correspondences between pixels of two given frames will be filtered out
+ //   *                     if their depth difference is larger than maxDepthDiff
+ //   * @param maxPointsPart The method uses a random pixels subset of size frameWidth x frameHeight x pointsPart
+ //   * @param iterCounts Count of iterations on each pyramid level.
+ //   * @param transformType Class of trasformation
+ //   */
+ //  ICPOdometry(const Mat& cameraMatrix, float minDepth = DEFAULT_MIN_DEPTH(), float maxDepth = DEFAULT_MAX_DEPTH(),
+ //              float maxDepthDiff = DEFAULT_MAX_DEPTH_DIFF(), float maxPointsPart = DEFAULT_MAX_POINTS_PART(),
+ //              const std::vector<int>& iterCounts = std::vector<int>(), int transformType = RIGID_BODY_MOTION);
 
-    virtual Size prepareFrameCache(Ptr<OdometryFrame>& frame, int cacheType) const;
+ //  virtual Size prepareFrameCache(Ptr<OdometryFrame>& frame, int cacheType) const;
 
-    cv::Mat getCameraMatrix() const
-    {
-        return cameraMatrix;
-    }
-    void setCameraMatrix(const cv::Mat &val)
-    {
-        cameraMatrix = val;
-    }
-    double getMinDepth() const
-    {
-        return minDepth;
-    }
-    void setMinDepth(double val)
-    {
-        minDepth = val;
-    }
-    double getMaxDepth() const
-    {
-        return maxDepth;
-    }
-    void setMaxDepth(double val)
-    {
-        maxDepth = val;
-    }
-    double getMaxDepthDiff() const
-    {
-        return maxDepthDiff;
-    }
-    void setMaxDepthDiff(double val)
-    {
-        maxDepthDiff = val;
-    }
-    cv::Mat getIterationCounts() const
-    {
-        return iterCounts;
-    }
-    void setIterationCounts(const cv::Mat &val)
-    {
-        iterCounts = val;
-    }
-    double getMaxPointsPart() const
-    {
-        return maxPointsPart;
-    }
-    void setMaxPointsPart(double val)
-    {
-        maxPointsPart = val;
-    }
-    int getTransformType() const
-    {
-        return transformType;
-    }
-    void setTransformType(int val)
-    {
-        transformType = val;
-    }
-    double getMaxTranslation() const
-    {
-        return maxTranslation;
-    }
-    void setMaxTranslation(double val)
-    {
-        maxTranslation = val;
-    }
-    double getMaxRotation() const
-    {
-        return maxRotation;
-    }
-    void setMaxRotation(double val)
-    {
-        maxRotation = val;
-    }
-    Ptr<RgbdNormals> getNormalsComputer() const
-    {
-        return normalsComputer;
-    }
+ //  cv::Mat getCameraMatrix() const
+ //  {
+ //      return cameraMatrix;
+ //  }
+ //  void setCameraMatrix(const cv::Mat &val)
+ //  {
+ //      cameraMatrix = val;
+ //  }
+ //  double getMinDepth() const
+ //  {
+ //      return minDepth;
+ //  }
+ //  void setMinDepth(double val)
+ //  {
+ //      minDepth = val;
+ //  }
+ //  double getMaxDepth() const
+ //  {
+ //      return maxDepth;
+ //  }
+ //  void setMaxDepth(double val)
+ //  {
+ //      maxDepth = val;
+ //  }
+ //  double getMaxDepthDiff() const
+ //  {
+ //      return maxDepthDiff;
+ //  }
+ //  void setMaxDepthDiff(double val)
+ //  {
+ //      maxDepthDiff = val;
+ //  }
+ //  cv::Mat getIterationCounts() const
+ //  {
+ //      return iterCounts;
+ //  }
+ //  void setIterationCounts(const cv::Mat &val)
+ //  {
+ //      iterCounts = val;
+ //  }
+ //  double getMaxPointsPart() const
+ //  {
+ //      return maxPointsPart;
+ //  }
+ //  void setMaxPointsPart(double val)
+ //  {
+ //      maxPointsPart = val;
+ //  }
+ //  int getTransformType() const
+ //  {
+ //      return transformType;
+ //  }
+ //  void setTransformType(int val)
+ //  {
+ //      transformType = val;
+ //  }
+ //  double getMaxTranslation() const
+ //  {
+ //      return maxTranslation;
+ //  }
+ //  void setMaxTranslation(double val)
+ //  {
+ //      maxTranslation = val;
+ //  }
+ //  double getMaxRotation() const
+ //  {
+ //      return maxRotation;
+ //  }
+ //  void setMaxRotation(double val)
+ //  {
+ //      maxRotation = val;
+ //  }
+ //  Ptr<RgbdNormals> getNormalsComputer() const
+ //  {
+ //      return normalsComputer;
+ //  }
 
-  protected:
-    virtual void
-    checkParams() const;
+ //protected:
+ //  virtual void
+ //  checkParams() const;
 
-    virtual bool
-    computeImpl(const Ptr<OdometryFrame>& srcFrame, const Ptr<OdometryFrame>& dstFrame, Mat& Rt,
-                const Mat& initRt) const;
+ //  virtual bool
+ //  computeImpl(const Ptr<OdometryFrame>& srcFrame, const Ptr<OdometryFrame>& dstFrame, Mat& Rt,
+ //              const Mat& initRt) const;
 
-    // Some params have commented desired type. It's due to AlgorithmInfo::addParams does not support it now.
-    /*float*/
-    double minDepth, maxDepth, maxDepthDiff;
-    /*float*/
-    double maxPointsPart;
-    /*vector<int>*/
-    Mat iterCounts;
+ //  // Some params have commented desired type. It's due to AlgorithmInfo::addParams does not support it now.
+ //  /*float*/
+ //  double minDepth, maxDepth, maxDepthDiff;
+ //  /*float*/
+ //  double maxPointsPart;
+ //  /*vector<int>*/
+ //  Mat iterCounts;
 
-    Mat cameraMatrix;
-    int transformType;
+ //  Mat cameraMatrix;
+ //  int transformType;
 
-    double maxTranslation, maxRotation;
+ //  double maxTranslation, maxRotation;
 
-    mutable Ptr<RgbdNormals> normalsComputer;
-  };
+ //  mutable Ptr<RgbdNormals> normalsComputer;
+ //};
 
   /** Odometry that merges RgbdOdometry and ICPOdometry by minimize sum of their energy functions.
    */
@@ -1055,9 +1055,9 @@ using namespace cv;
    * @param warpedMask The warped mask.
    */
 
-  void
-  warpFrame(const Mat& image, const Mat& depth, const Mat& mask, const Mat& Rt, const Mat& cameraMatrix,
-            const Mat& distCoeff, Mat& warpedImage, Mat* warpedDepth = 0, Mat* warpedMask = 0);
+  //void
+  //warpFrame(const Mat& image, const Mat& depth, const Mat& mask, const Mat& Rt, const Mat& cameraMatrix,
+  //          const Mat& distCoeff, Mat& warpedImage, Mat* warpedDepth = 0, Mat* warpedMask = 0);
 
 // TODO Depth interpolation
 // Curvature
